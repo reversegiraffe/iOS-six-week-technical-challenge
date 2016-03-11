@@ -15,8 +15,8 @@ class EntryViewController: UIViewController {
     
 
     @IBOutlet weak var entryTextView: UITextView!
-    
-    
+
+    @IBOutlet weak var resultsLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,14 +35,19 @@ class EntryViewController: UIViewController {
         
         let entryArray = createArray(entryTextView.text)
         
-        if entryArray.count % 2 != 0 {
+        if entryArray.count % 2 != 0 || entryArray.count == 0 {
             
             let alertController = UIAlertController(title: "Invalid Entry", message: "Please enter an even number of elements", preferredStyle: .Alert)
             let okAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
             
             alertController.addAction(okAction)
+            
+            presentViewController(alertController, animated: true, completion: nil)
+            
         } else {
             
+            let result = "\(pairArray(entryArray))"
+            resultsLabel.text = result
         }
     }
     
