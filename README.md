@@ -18,6 +18,8 @@ Write a Pair Randomizer application that takes a list of objects and pairs them 
 
 Take as much time as needed to complete the challenge. Add a note at the bottom of this README.md file with how long it took you to complete the challenge.
 
+2.5 to 3 hours? I don't know
+
 Example:
 
 ```Completed in 2.5 hours.```
