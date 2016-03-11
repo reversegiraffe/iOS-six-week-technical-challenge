@@ -11,9 +11,12 @@ import GameplayKit
 
 class EntryViewController: UIViewController {
     
-    let sharedController = EntryViewController()
+    static let sharedController = EntryViewController()
+    
 
     @IBOutlet weak var entryTextView: UITextView!
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,12 +30,23 @@ class EntryViewController: UIViewController {
     }
     
     
+    
     @IBAction func enterButtonTapped(sender: AnyObject) {
+        
+        let entryArray = createArray(entryTextView.text)
+        
+        if entryArray.count % 2 != 0 {
+            
+            let alertController = UIAlertController(title: "Invalid Entry", message: "Please enter an even number of elements", preferredStyle: .Alert)
+            let okAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+            
+            alertController.addAction(okAction)
+        } else {
+            
+        }
     }
     
     func pairArray(array: [String]) -> [(String, String)]  {
-        
-        //error handling for odd numbers, display alert requiring and even array?
         
         var mutatingArray = array
         var returnArray: [(String, String)] = []
@@ -56,6 +70,11 @@ class EntryViewController: UIViewController {
         
         return returnArray
         
+    }
+    
+    func createArray(string: String) -> [String] {
+        
+        return string.characters.split { $0 == "," }.map(String.init)
     }
 
     /*
