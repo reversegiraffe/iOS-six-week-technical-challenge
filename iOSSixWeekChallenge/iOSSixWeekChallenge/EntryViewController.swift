@@ -9,7 +9,7 @@
 import UIKit
 import GameplayKit
 
-class EntryViewController: UIViewController {
+class EntryViewController: UIViewController, UITextViewDelegate {
     
     static let sharedController = EntryViewController()
     
@@ -20,6 +20,11 @@ class EntryViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if let savedText = NSUserDefaults.standardUserDefaults().objectForKey("savedText") {
+            
+            resultsLabel.text = savedText as? String
+        }
 
         // Do any additional setup after loading the view.
     }
@@ -48,6 +53,7 @@ class EntryViewController: UIViewController {
             
             let result = "\(pairArray(entryArray))"
             resultsLabel.text = result
+            NSUserDefaults.standardUserDefaults().setObject(result, forKey: "savedText")
         }
     }
     
@@ -80,6 +86,14 @@ class EntryViewController: UIViewController {
     func createArray(string: String) -> [String] {
         
         return string.characters.split { $0 == "," }.map(String.init)
+    }
+    
+    func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
+        if(text == "\n") {
+            textView.resignFirstResponder()
+            return false
+        }
+        return true
     }
 
     /*
